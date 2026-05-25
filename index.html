@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Oceanix | Discover the Deep</title>
+    <link
+        href='https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&display=swap'
+        rel='stylesheet'>
+    <link href='styles.css' rel='stylesheet'>
+</head>
+
+<body>
+    <div id='preloader' class='preloader'>
+        <h2 class='preloader__title'>Oceanix.</h2>
+        <div class='preloader__track'>
+            <div id='loader-bar' class='preloader__bar'></div>
+        </div>
+        <p class='preloader__caption'>Initializing Environment...</p>
+    </div>
+
+    <video id='bg-video' autoplay loop muted playsinline poster="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Coral_Outcrop_Flynn_Reef.jpg/960px-Coral_Outcrop_Flynn_Reef.jpg">
+        <source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/1/18/Under_the_Sea_-_8295.mp4/Under_the_Sea_-_8295.mp4.720p.mp4" type="video/mp4">
+    </video>
+    <div id='video-overlay'></div>
+    <div id='cinematic-overlay'></div>
+    
+    <nav class='site-nav'>
+        <div class='site-nav__inner glass-panel'>
+            <a href='#top' class='site-nav__brand'>Oceanix.</a>
+            <div class='site-nav__links' id='site-nav-links'>
+                <a href='#about' class='site-nav__link'>About</a>
+                <a href='#gallery' class='site-nav__link'>Gallery</a>
+                <a href='#mysteries' class='site-nav__link'>Mysteries</a>
+                <a href='#zones' class='site-nav__link'>Zones</a>
+                <a href='#species' class='site-nav__link'>Species</a>
+                <a href='#oceans' class='site-nav__link'>Oceans</a>
+            </div>
+            <a href='#live-data' class='btn btn--primary btn--small site-nav__cta'>Live Data</a>
+            <button class='menu-toggle' id='menu-toggle' aria-label='Toggle navigation menu'>
+                <svg class='menu-toggle__icon' viewBox='0 0 24 24' fill='none' stroke='currentColor'>
+                    <path stroke-linecap='round' stroke-linejoin='round' d='M4 6h16M4 12h16M4 18h16'></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Sticky Depth Meter -->
+    <div id="depth-meter" aria-hidden="true">
+        <div class="value">0m</div>
+        <div class="line"></div>
+    </div>
+
+    <main id='top' class='page-main'>
+        <section class='hero-section'>
+            <div class='hero-layout'>
+                <div class='hero-content'>
+                    <span class='eyebrow hero-pill'>Future marine atlas</span>
+                    <h1 class='hero-title'>
+                        The ocean,<br><span class='hero-title__accent'>recomposed.</span>
+                    </h1>
+                    <p class='hero-summary'>
+                        A modern editorial journey through surface light, pressure zones, and live species data. Built
+                        to feel like a gallery, not a brochure.
+                    </p>
+                    <div class='hero-actions'>
+                        <a href='#about' class='btn btn--primary btn--large'>Start at the surface</a>
+                        <a href='#mysteries' class='btn btn--ghost btn--large'>View the abyss</a>
+                    </div>
+                    <div class='hero-stats'>
+                        <div class='hero-stat glass-panel'>
+                            <div class='eyebrow'>Coverage</div>
+                            <div class='hero-stat__value'>71%</div>
+                        </div>
+                        <div class='hero-stat glass-panel'>
+                            <div class='eyebrow'>Known species</div>
+                            <div class='hero-stat__value'>230k+</div>
+                        </div>
+                        <div class='hero-stat glass-panel'>
+                            <div class='eyebrow'>Oxygen</div>
+                            <div class='hero-stat__value'>50%</div>
+                        </div>
+                        <div class='hero-stat glass-panel'>
+                            <div class='eyebrow'>Unexplored</div>
+                            <div class='hero-stat__value'>80%+</div>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class='hero-card glass-panel'>
+                    <div class='hero-card__glow'></div>
+                    <div class='hero-card__header'>
+                        <div>
+                            <p class='eyebrow'>Signal board</p>
+                            <h2 class='hero-card__title'>Blue Planet Brief</h2>
+                        </div>
+                        <button id='audio-toggle' class='audio-toggle'>
+                            <svg id='icon-play' class='audio-toggle__icon' fill='none' stroke='currentColor'
+                                viewBox='0 0 24 24'>
+                                <path stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'
+                                    d='M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z'>
+                                </path>
+                            </svg>
+                            <svg id='icon-mute' class='audio-toggle__icon is-hidden' fill='none' stroke='currentColor'
+                                viewBox='0 0 24 24'>
+                                <path stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'
+                                    d='M6 18L18 6M6 6l12 12'></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class='hero-card__body'>
+                        <div class='signal-card signal-card--shadow'>
+                            <div class='signal-card__row'>
+                                <span class='signal-card__label'>Unexplored</span>
+                                <strong class='signal-card__value'>80%</strong>
+                            </div>
+                            <p class='signal-card__note'>The deep sea is still mostly a blank map.</p>
+                        </div>
+                        <div class='signal-card-grid'>
+                            <div class='signal-card signal-card--shadow'>
+                                <div class='eyebrow'>Species</div>
+                                <div class='signal-card__value'>230k+</div>
+                            </div>
+                            <div class='signal-card signal-card--shadow'>
+                                <div class='eyebrow'>Oxygen</div>
+                                <div class='signal-card__value'>50%</div>
+                            </div>
+                        </div>
+                        <div class='signal-card signal-card--border'>
+                            <p class='eyebrow'>Design note</p>
+                            <p class='signal-card__note'>The layout stays quiet and spacious so the ocean canvas and the
+                                content feel like one system.</p>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section id='about' class='page-section about-section'>
+            <div class='container about-layout'>
+                <div class='about-text'>
+                    <p class='eyebrow'>About the deep</p>
+                    <h2 class='section-title'>The engine: reefs, currents, and vents.</h2>
+                    <p class='section-subtitle'>These three systems—coral reefs, the global conveyor belt, and
+                        hydrothermal vents—define how the ocean stores heat, supports life, and redistributes energy.
+                    </p>
+
+                    <div class='about-cards'>
+                        <div class='about-card'>
+                            <h4 class='about-card__title'>Coral Reefs</h4>
+                            <p class='about-card__text'>Covering less than 1% of the seafloor, coral reefs support
+                                roughly 25% of marine species. They are biodiversity hotspots and coastal defenders.</p>
+                        </div>
+                        <div class='about-card'>
+                            <h4 class='about-card__title'>Global Conveyor Belt</h4>
+                            <p class='about-card__text'>A hidden river of deep currents moves heat and salt around the
+                                globe, regulating climate on planetary scales.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='about-media'>
+                    <div class='about-media__image glass-panel'>
+                        <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Coral_Outcrop_Flynn_Reef.jpg/960px-Coral_Outcrop_Flynn_Reef.jpg'
+                            alt='Coral reef underwater' class='about-media__img image-focus--reef'>
+                    </div>
+                    <div class='about-media__aside'>
+                        <div class='about-card about-card--compact'>
+                            <h4 class='about-card__title about-card__title--small'>Hydrothermal Vents</h4>
+                            <p class='about-card__text'>Alien ecosystems rely on toxic chemistry, thriving where
+                                sunlight never reaches and temperatures can exceed 400°C.</p>
+                        </div>
+                        <div class='about-card about-card--compact'>
+                            <h4 class='about-card__title about-card__title--small'>Conveyor Impact</h4>
+                            <p class='about-card__text'>By moving heat and nutrients vertically and across basins, deep
+                                currents knit local ecosystems into global climate responses.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id='gallery' class='page-section gallery-section'>
+            <div class='container'>
+                <div class='section-header section-header--split'>
+                    <div>
+                        <p class='eyebrow'>Ocean stories</p>
+                        <h2 class='section-title'>Content first, with the imagery to match.</h2>
+                    </div>
+                    <p class='section-subtitle section-header__subtitle'>Each card pairs a photo with a short
+                        educational note so the page feels like a learning atlas instead of a gallery wall.</p>
+                </div>
+
+                <div class='gallery-grid'>
+                    <article class='gallery-card gallery-card--wide glass-panel'>
+                        <div class='gallery-card__split'>
+                            <div class='gallery-card__media'>
+                                <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Coral_Outcrop_Flynn_Reef.jpg/960px-Coral_Outcrop_Flynn_Reef.jpg'
+                                    alt='Vibrant coral reef teeming with fish'
+                                    class='gallery-card__image gallery-card__image--tall image-focus--reef'>
+                            </div>
+                            <div class='gallery-card__content'>
+                                <div>
+                                    <p class='eyebrow'>Coral reefs</p>
+                                    <h3 class='gallery-card__title'>Living architecture</h3>
+                                    <p class='gallery-card__text'>Reefs shelter thousands of species, buffer wave
+                                        energy, and support coastal communities through fisheries and tourism.</p>
+                                </div>
+                                <div class='gallery-facts'>
+                                    <div class='gallery-fact'>
+                                        <span class='gallery-fact__label'>Habitat</span>
+                                        <p class='gallery-fact__value'>Nursery for fish and invertebrates</p>
+                                    </div>
+                                    <div class='gallery-fact'>
+                                        <span class='gallery-fact__label'>Threat</span>
+                                        <p class='gallery-fact__value'>Heat stress and acidification</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class='gallery-card gallery-card--narrow glass-panel'>
+                        <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Ocean_currents_1943_%28borderless%293.png/960px-Ocean_currents_1943_%28borderless%293.png'
+                            alt='Ocean waves and currents aerial view' class='gallery-card__image'>
+                        <div class='gallery-card__content'>
+                            <p class='eyebrow'>Currents</p>
+                            <h3 class='gallery-card__title gallery-card__title--small'>Water in motion</h3>
+                            <p class='gallery-card__text'>Surface currents move heat across the planet, linking weather,
+                                migration routes, and the balance of marine ecosystems.</p>
+                        </div>
+                    </article>
+
+                    <article class='gallery-card gallery-card--narrow glass-panel'>
+                        <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Lion%27s_mane_jellyfish_in_Gullmarn_fjord_at_S%C3%A4mstad_8.jpg/960px-Lion%27s_mane_jellyfish_in_Gullmarn_fjord_at_S%C3%A4mstad_8.jpg'
+                            alt='Jellyfish glowing underwater' class='gallery-card__image'>
+                        <div class='gallery-card__content'>
+                            <p class='eyebrow'>Twilight life</p>
+                            <h3 class='gallery-card__title gallery-card__title--small'>Drift and pulse</h3>
+                            <p class='gallery-card__text'>Jellyfish blooms remind us that the surface and twilight zones
+                                are connected by food, light, and seasonal change.</p>
+                        </div>
+                    </article>
+
+                    <article class='gallery-card gallery-card--wide glass-panel'>
+                        <div class='gallery-card__split gallery-card__split--reverse'>
+                            <div class='gallery-card__content'>
+                                <p class='eyebrow'>Schools</p>
+                                <h3 class='gallery-card__title'>Migration in motion</h3>
+                                <p class='gallery-card__text'>Fish schools move as a single pattern to avoid predators,
+                                    conserve energy, and follow seasonal food pulses across open water.</p>
+                                <div class='gallery-facts'>
+                                    <div class='gallery-fact'>
+                                        <span class='gallery-fact__label'>Scale</span>
+                                        <p class='gallery-fact__value'>Tiny movements become huge migrations</p>
+                                    </div>
+                                    <div class='gallery-fact'>
+                                        <span class='gallery-fact__label'>Value</span>
+                                        <p class='gallery-fact__value'>Food webs depend on the journey</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='gallery-card__media'>
+                                <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/School_of_Pterocaesio_chrysozona_in_Papua_New_Guinea_1.jpg/960px-School_of_Pterocaesio_chrysozona_in_Papua_New_Guinea_1.jpg'
+                                    alt='School of fish swimming in formation'
+                                    class='gallery-card__image gallery-card__image--tall'>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id='mysteries' class='page-section mysteries-section'>
+            <div class='container mysteries-panel'>
+                <div class='mysteries-layout'>
+                    <div class='mysteries-text'>
+                        <p class='eyebrow'>Mysteries</p>
+                        <h2 class='section-title'>The deep still holds most of the unknown.</h2>
+                        <p class='section-subtitle'>Layered currents and bioluminescent zones are explained in concise
+                            cards so the science reads clearly at a glance.</p>
+                        <div class='mysteries-note'>
+                            <p>Below the waves, scale and pressure invent new rules. These features explore myth and
+                                measurement—where story meets the smallest scientific instrument.</p>
+                        </div>
+                    </div>
+                    <div class='mysteries-list'>
+                        <article class='mystery-card'>
+                            <h3 class='mystery-card__title'>The Mariana Trench</h3>
+                            <p class='mystery-card__text'>Thirty-six thousand feet down, the Challenger Deep is a
+                                cathedral of pressure—every square inch carries the weight of eight tons above. In that
+                                silence, life adapts at physical limits, and the instruments we send become small,
+                                fragile emissaries.</p>
+                        </article>
+
+                        <article class='mystery-card mystery-card--deep'>
+                            <h3 class='mystery-card__title'>The Kraken</h3>
+                            <p class='mystery-card__text'>What once was myth took shape in the Giant Squid: enormous,
+                                elusive, and warlike in the stories sailors tell. These deep cephalopods wage silent
+                                wars in black water—an evolutionary theatre where strength, disguise, and sensory
+                                cunning decide survival.</p>
+                        </article>
+
+                        <article class='mystery-card'>
+                            <h3 class='mystery-card__title'>The Alien World Below</h3>
+                            <p class='mystery-card__text'>We have mapped Mars better than our seafloor. Eighty percent
+                                of the ocean remains unexplored—an alien continent of vents, trenches, and biological
+                                oddities that defy surface assumptions about life.</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id='zones' class='page-section zones-section'>
+            <div class='container'>
+                <div class='zones-header'>
+                    <p class='eyebrow'>Vertical journey</p>
+                    <h2 class='section-title'>Four layers, one descent.</h2>
+                    <p class='section-subtitle'>A stacked layout keeps the reading flow calm and lets the hierarchy do
+                        the work.</p>
+                </div>
+
+                <div class='zones-list'>
+                    <article class='zone-card glass-panel'>
+                        <div class='zone-card__meta'>
+                            <div class='zone-card__index'>01</div>
+                            <div class='zone-card__facts'>
+                                <div>Depth: 0–200m</div>
+                                <div>Light: Sunlight</div>
+                                <div>Feature: Photosynthesis</div>
+                            </div>
+                        </div>
+                        <div class='zone-card__content'>
+                            <h3 class='zone-card__title'>Epipelagic</h3>
+                            <p class='zone-card__text'>0 - 200m. Also known as the sunlight zone, it receives enough
+                                sunlight for photosynthesis to occur. As a result, it is home to most of the ocean's
+                                plant life, including phytoplankton, which forms the base of the marine food web.</p>
+                            <p class='zone-card__text'>The abundance of food and light supports a massive diversity of
+                                life, ranging from tiny zooplankton to massive apex predators like great white sharks,
+                                dolphins, and tuna. The water temperature is relatively warm and strongly influenced by
+                                the sun and surface winds, leading to well-mixed layers.</p>
+                            <p class='zone-card__text'>Because visibility is high, many species here rely on sight for
+                                hunting and evasion, featuring countershading as a primary camouflage mechanism. It acts
+                                as the primary heat engine and oxygen producer for the entire planet.</p>
+                        </div>
+                    </article>
+                    <article class='zone-card glass-panel'>
+                        <div class='zone-card__meta'>
+                            <div class='zone-card__index'>02</div>
+                            <div class='zone-card__facts'>
+                                <div>Depth: 200–1,000m</div>
+                                <div>Light: Twilight</div>
+                                <div>Feature: Bioluminescence</div>
+                            </div>
+                        </div>
+                        <div class='zone-card__content'>
+                            <h3 class='zone-card__title'>Mesopelagic</h3>
+                            <p class='zone-card__text'>200 - 1,000m. Often referred to as the twilight zone, this layer
+                                receives only faint, filtered traces of sunlight—insufficient for photosynthesis.
+                                Consequently, no plants can grow here, and food becomes increasingly scarce.</p>
+                            <p class='zone-card__text'>Animals in this zone have evolved incredible adaptations to
+                                survive, with many developing large, upward-looking eyes to catch the faintest
+                                silhouettes of prey against the surface. Bioluminescence is highly common, with fish,
+                                squid, and jellyfish using specialized light-producing organs to communicate, attract
+                                prey, or camouflage themselves.</p>
+                        </div>
+                    </article>
+                    <article class='zone-card glass-panel'>
+                        <div class='zone-card__meta'>
+                            <div class='zone-card__index'>03</div>
+                            <div class='zone-card__facts'>
+                                <div>Depth: 1,000–4,000m</div>
+                                <div>Light: Midnight</div>
+                                <div>Feature: Low-energy adaptations</div>
+                            </div>
+                        </div>
+                        <div class='zone-card__content'>
+                            <h3 class='zone-card__title'>Bathypelagic</h3>
+                            <p class='zone-card__text'>1,000 - 4,000m. Known as the midnight zone, this layer exists in
+                                perpetual, crushing darkness. The only light visible here is the occasional blue-green
+                                flash of bioluminescence produced by the bizarre creatures that call this extreme
+                                environment home.</p>
+                            <p class='zone-card__text'>The water pressure is immense, reaching nearly 6,000 pounds per
+                                square inch, and temperatures hover just barely above freezing. Because food is
+                                incredibly scarce, animals here survive on "marine snow"—a constant drift of organic
+                                detritus falling from the upper layers.</p>
+                        </div>
+                    </article>
+                    <article class='zone-card glass-panel'>
+                        <div class='zone-card__meta'>
+                            <div class='zone-card__index'>04</div>
+                            <div class='zone-card__facts'>
+                                <div>Depth: 4,000–6,000m</div>
+                                <div>Light: Pitch black</div>
+                                <div>Feature: Whale-fall ecosystems</div>
+                            </div>
+                        </div>
+                        <div class='zone-card__content'>
+                            <h3 class='zone-card__title'>Abyssopelagic</h3>
+                            <p class='zone-card__text'>4,000 - 6,000m. The lower abyss is a desolate, freezing, and
+                                nearly pitch-black realm that covers the vast majority of the ocean floor. The name
+                                "abyss" originates from a Greek word meaning "no bottom," perfectly describing this
+                                seemingly endless expanse of mud and fine sediment.</p>
+                            <p class='zone-card__text'>The crushing hydrostatic pressure here is so intense that it
+                                would instantly collapse human lungs, yet a surprising array of specialized life
+                                thrives. The ecosystem relies entirely on dead biological matter settling from above,
+                                including massive whale falls that can sustain localized communities for decades.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id='species' class='page-section species-section'>
+            <div class='container species-layout'>
+                <div class='species-text'>
+                    <p class='eyebrow'>Species</p>
+                    <h2 class='section-title'>Live marine profiles, stacked one by one.</h2>
+                    <p class='section-subtitle'>Explore each species through a fuller profile with habitat, behavior,
+                        and defining traits presented in a format that is easier to scan and understand.</p>
+                </div>
+                <div class='species-panel'>
+                    <div id='species-grid' class='species-grid'></div>
+                </div>
+            </div>
+        </section>
+
+        <section id='oceans' class='page-section oceans-section'>
+            <div class='container'>
+                <div class='oceans-hero-header'>
+                    <p class='eyebrow'>Five oceans</p>
+                    <h2 class='section-title'>Five basins,<br><span class='oceans-title-accent'>each with its own story.</span></h2>
+                    <p class='section-subtitle'>Select an ocean to explore its depth, climate role, and defining features in detail.</p>
+                </div>
+
+                <!-- Horizontal card strip -->
+                <div class='oceans-card-strip'>
+                    <div id='oceans-grid' class='oceans-strip-scroll'></div>
+                </div>
+
+                <!-- Detail panel -->
+                <div id='ocean-info-display' class='ocean-detail-panel'>
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <section id='live-data' class='page-section live-data-section'>
+            <div class='container'>
+                <div class='live-data-header'>
+                    <div class='live-indicator'>
+                        <span class='live-dot'></span>
+                        <span class='live-text'>Live Telemetry</span>
+                    </div>
+                    <h2 class='section-title'>Global Ocean Feed</h2>
+                </div>
+
+                <div class='live-dashboard glass-panel'>
+                    <!-- Module 1: Sea Surface Temp -->
+                    <div class='dashboard-module temp-module'>
+                        <p class='module-label'>SST Anomaly</p>
+                        <div class='temp-value'>
+                            <span class='temp-number' id='sst-number'>+1.20</span><span class='temp-unit'>°C</span>
+                        </div>
+                        <svg class='temp-chart' viewBox='0 0 100 30' preserveAspectRatio='none'>
+                            <path class='chart-line' d='M0,15 Q10,5 20,15 T40,15 T60,20 T80,10 T100,15' fill='none'
+                                stroke='currentColor' stroke-width='2' stroke-linecap='round' />
+                        </svg>
+                    </div>
+
+                    <!-- Module 2: Abyssal Pressure -->
+                    <div class='dashboard-module pressure-module'>
+                        <p class='module-label'>Abyssal Pressure (Mariana)</p>
+                        <div class='pressure-value'>
+                            <span class='pressure-number' id='pressure-number'>15,750</span><span
+                                class='pressure-unit'>psi</span>
+                        </div>
+                        <p class='pressure-depth'>Depth: 10,984 m</p>
+                    </div>
+
+                    <!-- Module 3: Active Telemetry -->
+                    <div class='dashboard-module telemetry-module'>
+                        <p class='module-label'>Active Tag Feed</p>
+                        <ul class='telemetry-feed' id='telemetry-feed'>
+                            <li class='feed-item'>
+                                <span class='feed-time' id='feed-time-1'>10:42Z</span>
+                                <span class='feed-data'>White Shark 'Deep Blue' - Pinged 2m ago off Guadalupe</span>
+                            </li>
+                            <li class='feed-item'>
+                                <span class='feed-time' id='feed-time-2'>10:39Z</span>
+                                <span class='feed-data'>Loggerhead Turtle 'Luna' - Heading North, Gulf Stream</span>
+                            </li>
+                            <li class='feed-item'>
+                                <span class='feed-time' id='feed-time-3'>10:31Z</span>
+                                <span class='feed-data'>Argo Float 59062 - Descending to 2000m (Southern Ocean)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id='conservation' class='page-section conservation-section'>
+            <div class='container conservation-layout'>
+                <div class='conservation-text'>
+                    <p class='eyebrow'>Conservation</p>
+                    <h2 class='section-title'>Design with restraint. Protect the depth.</h2>
+                    <p class='section-subtitle'>A cleaner layout gives the content and the moving water space to coexist
+                        without competing for attention.</p>
+                </div>
+
+                <div class='conservation-stats'>
+                    <div class='conservation-card glass-panel'>
+                        <div class='eyebrow'>Carbon</div>
+                        <div class='conservation-card__value'>30%</div>
+                    </div>
+                    <div class='conservation-card glass-panel'>
+                        <div class='eyebrow'>Heat</div>
+                        <div class='conservation-card__value'>90%</div>
+                    </div>
+                    <div class='conservation-card glass-panel'>
+                        <div class='eyebrow'>Action</div>
+                        <div class='conservation-card__value'>Now</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class='site-footer'>
+            <div class='container footer-panel'>
+                <div class='footer-grid'>
+                    <div class='footer-brand'>
+                        <p class='eyebrow'>Oceanix</p>
+                        <h2 class='footer-title'>Learn the sea. Protect what it teaches us.</h2>
+                        <p class='footer-text'>An editorial ocean atlas built around education, imagery, and live
+                            storytelling from the surface to the abyss.</p>
+                    </div>
+                    <div class='footer-links'>
+                        <p class='eyebrow'>Explore</p>
+                        <div class='footer-links__list'>
+                            <a href='#about' class='footer-link'>About the deep</a>
+                            <a href='#gallery' class='footer-link'>Ocean stories</a>
+                            <a href='#mysteries' class='footer-link'>Mysteries</a>
+                            <a href='#species' class='footer-link'>Species</a>
+                            <a href='#oceans' class='footer-link'>Five oceans</a>
+                        </div>
+                    </div>
+                    <div class='footer-focus'>
+                        <p class='eyebrow'>Focus</p>
+                        <p class='footer-text'>Coral reefs, pelagic life, deep-sea mysteries, and conservation all live
+                            in the same visual language so the site stays educational first.</p>
+                    </div>
+                </div>
+                <div class='footer-bottom'>
+                    <span>Oceanix 2026</span>
+                    <span>Built for the deep.</span>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <audio id='ambient-audio' loop src='https://cdn.pixabay.com/download/audio/2022/03/10/audio_1c31382cc4.mp3'></audio>
+
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js'></script>
+    <script src='script.js?v=2'></script>
+</body>
+
+</html>
