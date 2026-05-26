@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </radialGradient>
+    <linearGradient id="wave1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#2dd4bf"/>
+    </linearGradient>
+    <linearGradient id="wave2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.3"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="outerGlow">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feFlood flood-color="#38bdf8" flood-opacity="0.4"/>
+      <feComposite in2="blur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="256" fill="url(#bg)"/>
+  
+  <!-- Subtle ring -->
+  <circle cx="256" cy="256" r="220" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-opacity="0.12"/>
+  
+  <!-- Main wave group -->
+  <g filter="url(#outerGlow)">
+    <!-- Primary wave - stylized "O" wave -->
+    <path d="M108 280 
+             C108 280, 140 210, 180 210 
+             C220 210, 230 260, 256 260 
+             C282 260, 292 200, 332 200 
+             C372 200, 404 280, 404 280" 
+          fill="none" stroke="url(#wave1)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Secondary wave - echo -->
+    <path d="M130 320 
+             C130 320, 158 268, 192 268 
+             C226 268, 236 308, 256 308 
+             C276 308, 286 258, 320 258 
+             C354 258, 382 320, 382 320" 
+          fill="none" stroke="url(#wave2)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Subtle third wave -->
+    <path d="M160 350 
+             C160 350, 185 320, 208 320 
+             C231 320, 240 342, 256 342 
+             C272 342, 281 316, 304 316 
+             C327 316, 352 350, 352 350" 
+          fill="none" stroke="#38bdf8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.25"/>
+  </g>
+  
+  <!-- Accent dot - like a water droplet -->
+  <circle cx="256" cy="168" r="12" fill="#38bdf8" opacity="0.8"/>
+  <circle cx="256" cy="168" r="6" fill="#ffffff" opacity="0.6"/>
+</svg>
